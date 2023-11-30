@@ -1,8 +1,9 @@
 class Task{
-    constructor(name, dueDate, project){
+    constructor(name, dueDate, project, complete){
         this.name = name,
         this.dueDate = dueDate
         this.project = project
+        this.complete = false
     }
     // SETTER
     setName(name){
@@ -22,8 +23,8 @@ class Task{
 
 const taskList = []
 
-function createTask(name, date){
-    return {name:name, dueDate:date}
+function createTask(name, date, project){
+    return {name:name, dueDate:date, project:project}
 }
 
 export { Task, taskList, createTask }

@@ -79,11 +79,31 @@ const taskTitle = document.createElement('h2')
 taskTitle.classList.add('project-title')
 taskTitle.innerText = "Tasks"
 
-function renderTasks(targetProject){     //COMPLETAR
-    targetProject.tasks.forEach((task)=>{
-        const currentTaskName = task
-        console.log(currentTaskName)
-    })
+const taskUl = document.createElement('ul')
+taskUl.classList.add("task-ul")
+
+
+function renderTasks(targetId){     //COMPLETAR
+    let taskUlContent = ''
+    const targetProject= projectList.find(project=>project.name === targetId)
+    if(targetProject){
+        console.log(targetProject.tasks)
+        targetProject.tasks.forEach((task)=>{
+            const taskName = task.name
+            const taskDueDate = task.date
+
+            taskUlContent += `
+            <li class="task-list-li">
+                <div class="task-list-div">
+                    <input class="task-checkbox" type="checkbox" id="${taskName}">
+                    <label class="task-label" for="${taskName}">${taskName}</label>
+                    <p>${taskDueDate}</p>
+                </div>
+            </li>
+            `
+        })
+    }
+    taskUl.innerHTML = taskUlContent
 }
 
 // ESTRUCTURA DIV CREACION DE TASK
@@ -112,6 +132,7 @@ taskCreation.appendChild(taskInputDate)
 
 taskDiv.appendChild(taskContainer)
 taskContainer.appendChild(taskTitle)
+taskContainer.appendChild(taskUl)
 // PARA LAS TAREAS INYECTADAS
 taskContainer.appendChild(taskCreation)
 

@@ -14,23 +14,32 @@ function createNewProject(){
 
 function createNewTask(){
     const taskInput = document.getElementById('inputNewtask')
+    const taskInputValue = taskInput
     const taskInputDate = document.getElementById('inputNewtaskDate')
     const newTaskName = taskInput.value
+    const newTaskDate = taskInputDate.value
+    const projectSelected = document.querySelector('.active-project').id
     if(newTaskName === '')return
     if(taskList.find((task)=>task.name === newTaskName))return
-    const newTask = createTask()
-    // COMPLETAR
+    const newTask = createTask(newTaskName, newTaskDate, projectSelected)
+    taskList.push(newTask)
+    taskInputValue.value = ""
+    taskInputDate.value = ""
+    console.log(taskList)
+    console.log(projectSelected)
 }
+
 
 
 function isChecked(targetId){
     const taskListContainer = document.querySelector('.task-container')
     const checkbox = document.querySelector(`#${targetId}`)
     if(checkbox.checked){
+        checkbox.classList.add('active-project')
         const targetProject = projectList.find((project)=>project.name === targetId)
         taskListContainer.classList.remove('inactive')
         renderTasks(targetProject)
-    }
+    }if(!checkbox.checked)checkbox.classList.remove('active-project')
 }
 
 

@@ -96,7 +96,7 @@ aside ul{
     margin-right: 1rem;
 }
 .project-checkbox{
-    display: none;
+    /* display: none; */
 }
 .project-checkbox:checked + label{
     background-color: var(--beige);
