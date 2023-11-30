@@ -5,9 +5,11 @@
     padding: 0;
     font-size: 14px;
     font-family: 'Kanit', sans-serif;
+    box-sizing: content-box;
 }
 :root{
     --amarillo-palido:#c9cf44;
+    --amarillo-nota:#e7d58e;
     --marroncito-nice:#484738;
     --beige:#adac9a;
     --blue-aqua:#00e7cb;
@@ -15,6 +17,7 @@
 }
 body{
     background-color: var(--marroncito-nice);
+    flex-shrink: 1;
 }
 input{
     border: none;
@@ -46,36 +49,101 @@ main{
     display: flex;
 }
 aside{
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    width: 20%;
+    width: 30%;
     height: 80vh;
     color: var(--marroncito-nice);
     padding: 10px 20px;
-    align-items: stretch;
+    align-items: center;
     justify-content: center;
 }
 aside ul{
     list-style: none;
-    padding: .2rem 1rem;
+}
+.project-title{
+    font-size: 1.6rem;
+    font-weight: bold;
 }
 .project-container{
     background-color: var(--amarillo-palido);
+    width: 180px;
+    padding: .2rem 1rem;
 }
 .project-list{
     background-color: var(--amarillo-palido);
+    width: 130px;
     cursor: pointer;
 }
 .input-task-div{
+    min-width: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: var(--amarillo-palido);
-    padding: .2rem 1rem;
 }
-.project-plus{
+.project-plus,
+.task-plus{
     width: 1.6rem;
     height: 1.6rem;
     cursor: pointer;
-    background-color: var(--amarillo-palido);
+}
+.project-label{
+    width: 100%;
+    display: inline-block;
+    padding: 2px ;
+    margin-right: 1rem;
+}
+.project-checkbox{
+    display: none;
+}
+.project-checkbox:checked + label{
+    background-color: var(--beige);
+    color: var(--marroncito-nice);
+    border-radius: 5px;
+}
+
+
+/* TASK DIV */
+.task-div{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.task-container{
+    width: 320px;
+    min-height: 250px;
+    background: var(--amarillo-nota);
+    padding: .2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+}
+.task-plus{
+    padding: 0 1rem 0 0;
+}
+.task-list-date{
+    font-size: .6rem;
+}
+.trask-creation{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    bottom: 0;
+}
+.task-list{
+    background: var(--amarillo-nota);
+}
+
+
+
+
+
+
+
+.inactive{
+    display: none;
 }

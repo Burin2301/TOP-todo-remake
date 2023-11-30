@@ -1,7 +1,7 @@
 import './styles/styles.css'
 import { header } from './UI/header'
-import { main, renderAside } from './UI/body'
-import { createNewProject } from './modules/functions'
+import { main, renderAside, renderTasks } from './UI/body'
+import { createNewProject, createNewTask, isChecked } from './modules/functions'
 import { projectList } from './modules/projects'
 
 function renderScreen(){
@@ -12,12 +12,20 @@ function renderScreen(){
 }
 
 document.addEventListener('click', (e)=>{
-    if(!e.target.id=== 'addProject')return
     if(e.target.id=== 'addProject'){
         createNewProject()
         renderAside(projectList)
     }
+    if(e.target.id === 'addTask'){
+        createNewTask()
+        renderTasks()
+    }
+    if(e.target.className == 'project-checkbox'){
+        const targedId = e.target.id
+        isChecked(targedId)
+    }
 })
+console.log(projectList.getTasks)
 
 document.addEventListener('DOMContentLoaded', renderScreen)
 
