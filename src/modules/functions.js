@@ -29,8 +29,6 @@ function createNewTask(){
     console.log(projectSelected)
 }
 
-
-
 function isChecked(targetId){
     const taskListContainer = document.querySelector('.task-container')
     const checkbox = document.querySelector(`#${targetId}`)
@@ -43,6 +41,26 @@ function isChecked(targetId){
     }
 }
 
+function buttonListener(){
+document.addEventListener('click', function(e){
+    if(e.target.id=== 'addProject'){
+        createNewProject()
+        renderAside(projectList)
+    }
+    if(e.target.className == 'project-checkbox'){
+        const targetId = e.target.id
+        isChecked(targetId)
+        renderTasks(targetId)
 
-export {createNewProject, isChecked, createNewTask}
+    }
+    if(e.target.id === 'addTask'){
+        createNewTask()
+        renderTasks('project2')
+    }
+
+})
+}
+
+
+export {createNewProject, isChecked, createNewTask, buttonListener}
 
