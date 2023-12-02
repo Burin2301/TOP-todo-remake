@@ -11,16 +11,10 @@ function renderScreen(){
     renderAside(projectList)
 }
 
-
-
 document.addEventListener('DOMContentLoaded', renderScreen)
-
-
-
 
 document.addEventListener('click', function(e){
     if(e.target.id=== 'addProject'){
-        taskUl.innerHTML=""
         createNewProject()
         renderAside(projectList)
     }
@@ -31,7 +25,6 @@ document.addEventListener('click', function(e){
 
     }
     if(e.target.id === 'addTask'){
-
         createNewTask()
         renderTasks('project2')
     }

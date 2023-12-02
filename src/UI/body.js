@@ -86,12 +86,12 @@ taskUl.classList.add("task-ul")
 function renderTasks(targetId){     //COMPLETAR
     let taskUlContent = ''
     const targetProject= projectList.find(project=>project.name === targetId)
-    if(targetProject){
+    if(!targetProject)return
+    else if(targetProject){
         console.log(targetProject.tasks)
         targetProject.tasks.forEach((task)=>{
             const taskName = task.name
             const taskDueDate = task.date
-
             taskUlContent += `
             <li class="task-list-li">
                 <div class="task-list-div">
@@ -102,6 +102,9 @@ function renderTasks(targetId){     //COMPLETAR
             </li>
             `
         })
+    }
+    else{
+        taskUlContent = ""
     }
     taskUl.innerHTML = taskUlContent
 }

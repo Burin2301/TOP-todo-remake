@@ -34,12 +34,13 @@ function createNewTask(){
 function isChecked(targetId){
     const taskListContainer = document.querySelector('.task-container')
     const checkbox = document.querySelector(`#${targetId}`)
+    if(!checkbox.checked)checkbox.classList.remove('active-project')
     if(checkbox.checked){
         checkbox.classList.add('active-project')
         const targetProject = projectList.find((project)=>project.name === targetId)
         taskListContainer.classList.remove('inactive')
         renderTasks(targetProject)
-    }if(!checkbox.checked)checkbox.classList.remove('active-project')
+    }
 }
 
 
