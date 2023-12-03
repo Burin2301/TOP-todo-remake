@@ -1,46 +1,40 @@
+import { renderAside } from "../UI/body"
+
 class Project{
     constructor(name, tasks){
-        this.name = name,
-        this.tasks = []
+        this._name = name,
+        this._tasks = []
     }
     // SETTER
     setName(name){
-        this.name = name
+        this._name = name
     }
     setTask(newTask){
-        this.tasks.push(newTask)
+        this._tasks.push(newTask)
     }
     // GETTER
     getProjectName(){
-        return this.name
+        return this._name
     }
     getTasks(){
-        return this.tasks
+        return this._tasks
     }
 }
 
-const projectList = []
+// I CREATE KEY FOR LOCAL STORAGE
+const LOCAL_STORAGE_PROJECT_KEY = 'projects.list'
+let projectList = JSON.parse(localStorage.getItem(LOCAL_STORAGE_PROJECT_KEY))||[]
 
 // PERSISTENCE
 
-function saveProjectsInLocal(infoToStore){
-    const key = 'Projects-List'
-    localStorage.setItem(key,JSON.stringify(infoToStore))
+function saveProjectsInLocalAndRender(){
+    localStorage.setItem(LOCAL_STORAGE_PROJECT_KEY,JSON.stringify(projectList))
+    renderAside(projectList)
 }
-function recoverLocalProjects(key){
-    const recoveredProjects = localStorage.getItem(key)
-    return JSON.parse(recoveredProjects)||[]
-}
-
-
-
-
-const project1 = new Project('Default')
-projectList.push(project1)
-
 
 function createProject(name){
-    return {name:name, tasks:[]}
+    const newProject = new Project(name)
+    return newProject
 }
 
 
@@ -48,6 +42,5 @@ export{
     Project,
     projectList,
     createProject,
-    saveProjectsInLocal,
-    recoverLocalProjects,
+    saveProjectsInLocalAndRender,
 }

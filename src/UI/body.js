@@ -27,7 +27,7 @@ function renderAside(array){
     let projectUlContent = ''
     array.forEach((project)=>{
         projectUl.innerHTML = null
-        const projectName = project.name
+        const projectName = project._name
         projectUlContent += `
         <li class="project-list">
             <div class="project-list-div">
@@ -84,12 +84,12 @@ taskUl.classList.add("task-ul")
 
 function renderTasks(targetId){     //COMPLETAR
     let taskUlContent = ''
-    const targetProject= projectList.find(project=>project.name === targetId)
+    const targetProject= projectList.find(project=>project._name === targetId)
     if(!targetProject)return
     else if(targetProject){
-        targetProject.tasks.forEach((task)=>{
-            const taskName = task.name
-            const taskDueDate = task.dueDate
+        targetProject._tasks.forEach((task)=>{
+            const taskName = task._name
+            const taskDueDate = task._dueDate
             taskUlContent += `
             <li class="task-list-li">
                 <div class="task-list-div">

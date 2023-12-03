@@ -1,4 +1,4 @@
-import format from "date-fns/format"
+import { renderTasks } from "../UI/body"
 
 class Task{
     constructor(name, dueDate, project, complete){
@@ -24,18 +24,14 @@ class Task{
     }
 }
 
-let taskList = []
+// I CREATE KEY FOR LOCAL STORAGE
+const LOCAL_STORAGE_TASK_KEY = "tasks.list"
+let taskList = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TASK_KEY))||[]
 
 // PERSISTENCE
 
-function saveTasksInLocal(infoToStore){
-    const key = 'Tasks-List'
-    localStorage.setItem(key,JSON.stringify(infoToStore))
-}
-
-function recoverLocalTasks(key){
-    const recoveredTasks = localStorage.getItem(key)
-    return JSON.parse(recoveredTasks)||[]
+function saveTasksInLocalandRender(){
+    localStorage.setItem(LOCAL_STORAGE_TASK_KEY,JSON.stringify(taskList))
 }
 
 
@@ -51,14 +47,16 @@ function createTask(name, date, project){
         const newDate = Date.now()
         const result = formatDate(newDate)
         date = result
-        return {name:name, dueDate:date, project:project}
+        const newTask = new Task(name, date, project)
+        return newTask
     }
     if(date!==""){
         const taskInputDate = document.getElementById('inputNewtaskDate')
         const newTaskDate = taskInputDate.value
         const result = formatDate(newTaskDate)
         date = result
-
+        const newTask = new Task(name, date, project)
+        return newTask
     }
     return {name:name, dueDate:date, project:project}
 }
@@ -67,6 +65,5 @@ export{
     Task,
     taskList,
     createTask,
-    saveTasksInLocal,
-    recoverLocalTasks,
+    saveTasksInLocalandRender,
 }
