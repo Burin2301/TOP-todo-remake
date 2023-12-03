@@ -25,14 +25,29 @@ class Task{
 
 const taskList = []
 
+
+
+function formatDate(date){
+    const formattedDate = new Date(date)
+    const options = {year: 'numeric', month:"2-digit", day:"2-digit"}
+    return formattedDate.toLocaleDateString(undefined, options)
+}
+
+
 function createTask(name, date, project){
     if(date===''){
         const newDate = Date.now()
-        const result = format(newDate, 'MM/dd/yyyy')
+        const result = formatDate(newDate)
         date = result
         return {name:name, dueDate:date, project:project}
     }
-
+    if(date!==""){
+        const taskInputDate = document.getElementById('inputNewtaskDate')
+        const newTaskDate = taskInputDate.value
+        const result = formatDate(newTaskDate)
+        date = result
+        return {name:name, dueDate:date, project:project}
+    }
 }
 
 export { Task, taskList, createTask }

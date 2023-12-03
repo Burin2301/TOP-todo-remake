@@ -1,6 +1,7 @@
 import { Project, createProject, projectList } from "./projects"
 import { renderTasks, renderAside } from "../UI/body"
 import { createTask, taskList } from "./tasks"
+import format from "date-fns/format"
 
 function createNewProject(){
     const projectInput = document.getElementById('inputNewProject')
@@ -12,21 +13,25 @@ function createNewProject(){
     projectInput.value = ''
 }
 
+
+
 function createNewTask(){
     const taskInput = document.getElementById('inputNewtask')
-    const taskInputValue = taskInput
     const taskInputDate = document.getElementById('inputNewtaskDate')
+    const date = taskInputDate.value
+    const taskInputValue = taskInput
     const newTaskName = taskInput.value
-    const newTaskDate = taskInputDate.value
     const projectSelected = document.querySelector('.active-project').id
     if(newTaskName === '')return
     if(taskList.find((task)=>task.name === newTaskName))return
-    const newTask = createTask(newTaskName, newTaskDate, projectSelected)
+    const newTask = createTask(newTaskName, date, projectSelected)
     taskList.push(newTask)
     pushTaskIntoProjects(newTask)
     taskInputValue.value = ""
     taskInputDate.value = ""
 }
+
+
 
 function isChecked(targetId){
     const taskListContainer = document.querySelector('.task-container')
