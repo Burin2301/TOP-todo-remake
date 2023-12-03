@@ -2,29 +2,41 @@ import format from "date-fns/format"
 
 class Task{
     constructor(name, dueDate, project, complete){
-        this.name = name,
-        this.dueDate = dueDate
-        this.project = project
-        this.complete = false
+        this._name = name,
+        this._dueDate = dueDate
+        this._project = project
+        this._complete = false
     }
     // SETTER
     setName(name){
-        this.name = name
+        this._name = name
     }
     setDueDate(date){
-        this.dueDate = date
+        this._dueDate = date
     }
+
     // GETTER
     getTaskName(){
-        return this.name
+        return this._name
     }
     getDueDate(){
-        return this.dueDate
+        return this._dueDate
     }
 }
 
-const taskList = []
+let taskList = []
 
+// PERSISTENCE
+
+function saveTasksInLocal(infoToStore){
+    const key = 'Tasks-List'
+    localStorage.setItem(key,JSON.stringify(infoToStore))
+}
+
+function recoverLocalTasks(key){
+    const recoveredTasks = localStorage.getItem(key)
+    return JSON.parse(recoveredTasks)||[]
+}
 
 
 function formatDate(date){
@@ -46,8 +58,15 @@ function createTask(name, date, project){
         const newTaskDate = taskInputDate.value
         const result = formatDate(newTaskDate)
         date = result
-        return {name:name, dueDate:date, project:project}
+
     }
+    return {name:name, dueDate:date, project:project}
 }
 
-export { Task, taskList, createTask }
+export{
+    Task,
+    taskList,
+    createTask,
+    saveTasksInLocal,
+    recoverLocalTasks,
+}

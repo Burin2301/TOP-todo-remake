@@ -2,8 +2,9 @@ import './styles/styles.css'
 import { header } from './UI/header'
 import { main, renderAside } from './UI/body'
 import { addTask } from './modules/functions'
-import { projectList } from './modules/projects'
+import { projectList, recoverLocalProjects } from './modules/projects'
 import { addProjectAndRenderProjects,  chooseProjectAndRenderItsTasks } from './modules/functions'
+import { taskList, recoverLocalTasks } from './modules/tasks'
 
 function renderScreen(){
     const contentDiv = document.querySelector('.content')
@@ -17,5 +18,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     addProjectAndRenderProjects()
     chooseProjectAndRenderItsTasks()
     addTask()
+    // taskList = recoverLocalTasks('Tasks-List')
+    projectList = recoverLocalProjects('Project-Lists')
 })
 

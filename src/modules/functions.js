@@ -1,6 +1,6 @@
-import { Project, createProject, projectList } from "./projects"
+import { Project, createProject, projectList, saveProjectsInLocal } from "./projects"
 import { renderTasks, renderAside } from "../UI/body"
-import { createTask, taskList } from "./tasks"
+import { createTask, saveTasksInLocal, taskList } from "./tasks"
 import format from "date-fns/format"
 
 function createNewProject(){
@@ -11,6 +11,7 @@ function createNewProject(){
     const newProject = createProject(newProjectName)
     projectList.push(newProject)
     projectInput.value = ''
+    saveProjectsInLocal(projectList)
 }
 
 
@@ -29,6 +30,7 @@ function createNewTask(){
     pushTaskIntoProjects(newTask)
     taskInputValue.value = ""
     taskInputDate.value = ""
+    saveTasksInLocal(taskList)
 }
 
 

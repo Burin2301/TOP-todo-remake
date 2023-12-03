@@ -20,6 +20,21 @@ class Project{
 }
 
 const projectList = []
+
+// PERSISTENCE
+
+function saveProjectsInLocal(infoToStore){
+    const key = 'Projects-List'
+    localStorage.setItem(key,JSON.stringify(infoToStore))
+}
+function recoverLocalProjects(key){
+    const recoveredProjects = localStorage.getItem(key)
+    return JSON.parse(recoveredProjects)||[]
+}
+
+
+
+
 const project1 = new Project('Default')
 projectList.push(project1)
 
@@ -29,4 +44,10 @@ function createProject(name){
 }
 
 
-export { Project, projectList, createProject }
+export{
+    Project,
+    projectList,
+    createProject,
+    saveProjectsInLocal,
+    recoverLocalProjects,
+}
