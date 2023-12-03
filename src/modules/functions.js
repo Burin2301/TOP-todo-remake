@@ -1,5 +1,5 @@
 import { Project, createProject, projectList } from "./projects"
-import { renderTasks } from "../UI/body"
+import { renderTasks, renderAside } from "../UI/body"
 import { createTask, taskList } from "./tasks"
 
 function createNewProject(){
@@ -23,10 +23,9 @@ function createNewTask(){
     if(taskList.find((task)=>task.name === newTaskName))return
     const newTask = createTask(newTaskName, newTaskDate, projectSelected)
     taskList.push(newTask)
+    pushTaskIntoProjects(newTask)
     taskInputValue.value = ""
     taskInputDate.value = ""
-    console.log(taskList)
-    console.log(projectSelected)
 }
 
 function isChecked(targetId){
@@ -41,26 +40,54 @@ function isChecked(targetId){
     }
 }
 
-function buttonListener(){
-document.addEventListener('click', function(e){
-    if(e.target.id=== 'addProject'){
+function addProjectAndRenderProjects(){
+    const addProjectBtn = document.getElementById('addProject')
+    addProjectBtn.addEventListener('click', ()=>{
         createNewProject()
         renderAside(projectList)
-    }
-    if(e.target.className == 'project-checkbox'){
-        const targetId = e.target.id
-        isChecked(targetId)
-        renderTasks(targetId)
+        chooseProjectAndRenderItsTasks()
+    })
+}
 
-    }
-    if(e.target.id === 'addTask'){
+function chooseProjectAndRenderItsTasks(){
+    const chosenProject = document.querySelectorAll('.project-checkbox')
+    chosenProject.forEach( project =>{
+        project.addEventListener('click', (e)=>{
+            let targetProjectID = e.target.id
+            isChecked(targetProjectID)
+            renderTasks(targetProjectID)
+        })
+    } )
+}
+
+function getTargetIdToRenderTasks(){
+    const target = document.querySelector('.active-project').id
+}
+
+function addTask(){
+    const addTaskBtn = document.querySelector('#addTask')
+    addTaskBtn.addEventListener('click',()=>{
         createNewTask()
-        renderTasks('project2')
-    }
+    })
+}
 
-})
+function pushTaskIntoProjects(newTask){
+    const taskProject = newTask.project
+    const projectExists = projectList.find(project=>project.name=== taskProject)
+    if(projectExists){
+        projectExists.tasks.push(newTask)
+        const projectName = projectExists.name
+        renderTasks(projectName)
+    }
+    console.table(projectList)
 }
 
 
-export {createNewProject, isChecked, createNewTask, buttonListener}
+export {
+    createNewProject,
+    createNewTask,
+    addTask,
+    addProjectAndRenderProjects,
+    chooseProjectAndRenderItsTasks,
+}
 

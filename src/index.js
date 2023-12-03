@@ -1,8 +1,9 @@
 import './styles/styles.css'
 import { header } from './UI/header'
-import { main, renderAside, renderTasks } from './UI/body'
-import { buttonListener } from './modules/functions'
+import { main, renderAside } from './UI/body'
+import { addTask } from './modules/functions'
 import { projectList } from './modules/projects'
+import { addProjectAndRenderProjects,  chooseProjectAndRenderItsTasks } from './modules/functions'
 
 function renderScreen(){
     const contentDiv = document.querySelector('.content')
@@ -11,6 +12,10 @@ function renderScreen(){
     renderAside(projectList)
 }
 
-document.addEventListener('DOMContentLoaded', renderScreen)
+document.addEventListener('DOMContentLoaded',()=>{
+    renderScreen()
+    addProjectAndRenderProjects()
+    chooseProjectAndRenderItsTasks()
+    addTask()
+})
 
-buttonListener()

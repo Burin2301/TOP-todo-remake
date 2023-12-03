@@ -1,3 +1,5 @@
+import format from "date-fns/format"
+
 class Task{
     constructor(name, dueDate, project, complete){
         this.name = name,
@@ -24,7 +26,13 @@ class Task{
 const taskList = []
 
 function createTask(name, date, project){
-    return {name:name, dueDate:date, project:project}
+    if(date===''){
+        const newDate = Date.now()
+        const result = format(newDate, 'MM/dd/yyyy')
+        date = result
+        return {name:name, dueDate:date, project:project}
+    }
+
 }
 
 export { Task, taskList, createTask }

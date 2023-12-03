@@ -31,7 +31,7 @@ function renderAside(array){
         projectUlContent += `
         <li class="project-list">
             <div class="project-list-div">
-                <input class="project-checkbox" name="project" type="radio" id="${projectName}">
+                <input class="project-checkbox" data-project-name="${projectName}" name="project" type="radio" id="${projectName}">
                 <label class="project-label" for="${projectName}">${projectName}</label>
             </div>
         </li>
@@ -39,7 +39,6 @@ function renderAside(array){
     })
     projectUl.innerHTML = projectUlContent
 }
-
 
 
 // CONTENIDO DEL DIV DONDE SE CREA EL PROJECT
@@ -88,10 +87,9 @@ function renderTasks(targetId){     //COMPLETAR
     const targetProject= projectList.find(project=>project.name === targetId)
     if(!targetProject)return
     else if(targetProject){
-        console.log(targetProject.tasks)
         targetProject.tasks.forEach((task)=>{
             const taskName = task.name
-            const taskDueDate = task.date
+            const taskDueDate = task.dueDate
             taskUlContent += `
             <li class="task-list-li">
                 <div class="task-list-div">
