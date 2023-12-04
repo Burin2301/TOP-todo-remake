@@ -28,10 +28,11 @@ function renderAside(array){
     array.forEach((project)=>{
         projectUl.innerHTML = null
         const projectName = project._name
+        const dataProjectName = "data-" + project._name.replace(" ","")
         projectUlContent += `
         <li class="project-list">
             <div class="project-list-div">
-                <input class="project-checkbox" data-project-name="${projectName}" name="project" type="radio" id="${projectName}">
+                <input class="project-checkbox" data-project="${dataProjectName}" name="project" type="radio" id="${projectName}">
                 <label class="project-label" for="${projectName}">${projectName}</label>
             </div>
         </li>

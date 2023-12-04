@@ -1,7 +1,6 @@
-import { Project, createProject, projectList, saveProjectsInLocalAndRender } from "./projects"
+import { Project, createProject, projectList, saveProjectsInLocalAndRender, selectedProject } from "./projects"
 import { renderTasks, renderAside } from "../UI/body"
 import { createTask, saveTasksInLocalandRender, taskList } from "./tasks"
-import format from "date-fns/format"
 
 function createNewProject(){
     const projectInput = document.getElementById('inputNewProject')
@@ -13,7 +12,9 @@ function createNewProject(){
     projectInput.value = ''
 }
 
-
+function getIdSelected(){
+    return document.querySelector('.active-project').id
+}
 
 function createNewTask(){
     const taskInput = document.getElementById('inputNewtask')
@@ -21,7 +22,8 @@ function createNewTask(){
     const date = taskInputDate.value
     const taskInputValue = taskInput
     const newTaskName = taskInput.value
-    const projectSelected = document.querySelector('.active-project').id
+    const projectSelected = getIdSelected()
+    console.log(projectSelected)
     if(newTaskName === '')return
     if(taskList.find((task)=>task._name === newTaskName))return
     const newTask = createTask(newTaskName, date, projectSelected)
@@ -33,15 +35,16 @@ function createNewTask(){
     saveTasksInLocalandRender()
 }
 
-
-
 function isChecked(targetId){
     const taskListContainer = document.querySelector('.task-container')
-    const checkbox = document.querySelector(`#${targetId}`)
-    if(!checkbox.checked)checkbox.classList.remove('active-project')
+    const targetProjectId = targetId.toString().slice(5)
+    console.log(targetProjectId)
+    const checkbox = document.getElementById(targetProjectId)
+    console.log(checkbox)
     if(checkbox.checked){
         checkbox.classList.add('active-project')
-        const targetProject = projectList.find((project)=>project._name === targetId)
+        const targetProject = projectList.find((project)=>project._name === targetProjectId)
+        console.log(targetProject)
         taskListContainer.classList.remove('inactive')
         renderTasks(targetProject)
     }
@@ -60,15 +63,12 @@ function chooseProjectAndRenderItsTasks(){
     const chosenProject = document.querySelectorAll('.project-checkbox')
     chosenProject.forEach( project =>{
         project.addEventListener('click', (e)=>{
+            let targetProjectData = e.target.getAttribute('data-project')
             let targetProjectID = e.target.id
-            isChecked(targetProjectID)
+            isChecked(targetProjectData)
             renderTasks(targetProjectID)
         })
     } )
-}
-
-function getTargetIdToRenderTasks(){
-    const target = document.querySelector('.active-project').id
 }
 
 function addTask(){
@@ -88,7 +88,6 @@ function pushTaskIntoProjects(newTask){
     }
     console.table(projectList)
 }
-
 
 export {
     createNewProject,

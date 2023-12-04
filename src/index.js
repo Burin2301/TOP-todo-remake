@@ -10,7 +10,7 @@ function renderScreen(){
     const contentDiv = document.querySelector('.content')
     contentDiv.appendChild(header)
     contentDiv.appendChild(main)
-    saveProjectsInLocalAndRender(projectList)
+    renderAside(projectList)
 }
 
 document.addEventListener('DOMContentLoaded',()=>{

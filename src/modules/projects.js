@@ -32,6 +32,8 @@ function saveProjectsInLocalAndRender(){
     renderAside(projectList)
 }
 
+let selectedProject = localStorage.getItem
+
 function createProject(name){
     const newProject = new Project(name)
     return newProject
@@ -43,4 +45,5 @@ export{
     projectList,
     createProject,
     saveProjectsInLocalAndRender,
+    selectedProject
 }
