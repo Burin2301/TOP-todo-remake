@@ -4,6 +4,7 @@ import { main, renderAside } from "./UI/body";
 import { projectList } from "./modules/projects";
 import {
   addProjectAndRenderProjects,
+  changeTaskStatus,
   chooseProjectAndRenderItsTasks,
 } from "./modules/functions";
 
@@ -18,4 +19,5 @@ document.addEventListener("DOMContentLoaded", () => {
   renderScreen();
   chooseProjectAndRenderItsTasks();
   addProjectAndRenderProjects();
+  changeTaskStatus();
 });

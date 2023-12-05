@@ -10,7 +10,6 @@ function createNewProject() {
   const projectInput = document.getElementById("inputNewProject");
   const newProjectName = projectInput.value;
   const newProjectId = newProjectName.replace(/\s+/g, '')
-  console.log(newProjectId)
   if (newProjectName === "" || newProjectId === "") return;
   if (projectList.some((project) => project._id === newProjectId)) return;
   const newProject = createProject(newProjectId, newProjectName);
@@ -100,22 +99,29 @@ function pushTaskIntoProjects(newTask) {
     const projectId = projectExists._id;
     renderTasks(projectId);
   }
-  console.table(projectList);
 }
 
-// COMPLETAR!!!
-// function changeTaskStatus(){
-//   const taskCheck = document.querySelectorAll('.task-list-li')
 
-//   taskCheck.forEach((checkbox)=>{
-//     checkbox.addEventListener('click',()=>{
-//       console.log("hola")
-//         // const taskCheckId = checkbox.id
-//         // const targetTask = taskList.find((task)=>task._id=== taskCheckId)
-//         // console.log(targetTask)
-//     })
-//   })
-// }
+function changeTaskStatus(){
+ document.addEventListener('click', (e)=>{
+  if(e.target.className.toLowerCase() === 'task-label'){
+    const targetTaskId = e.target.getAttribute('for')
+    const checkedTask = taskList.find(task=>task._id===targetTaskId)
+    const taskCheckbox = document.getElementById(targetTaskId)
+    taskCheckbox.addEventListener('change', (e)=>{
+      const checkboxStatus = e.target.checked
+      if(checkboxStatus){
+        checkedTask._complete = true
+      }
+      if(!checkboxStatus){
+        checkedTask._complete = false
+      }
+    })
+  }
+ })
+}
+
+
 
 export {
   createNewProject,
@@ -124,4 +130,5 @@ export {
   addProjectAndRenderProjects,
   chooseProjectAndRenderItsTasks,
   projectSelectedToRender,
+  changeTaskStatus,
 };

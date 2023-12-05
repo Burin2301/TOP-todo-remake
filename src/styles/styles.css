@@ -118,7 +118,7 @@ aside ul {
 }
 .task-list-date {
   font-size: 0.6rem;
-  background-color: var(--amarillo-nota);
+  background-color: var(--amarillo-notatask-label);
 }
 .trask-creation {
   display: flex;
@@ -142,6 +142,7 @@ aside ul {
   padding: 0 .4rem;
   margin-right: auto;
   overflow: hidden;
+  cursor: pointer;
 }
 .task-checkbox{
   margin-right: 1rem;

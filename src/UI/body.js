@@ -87,8 +87,8 @@ function renderTasks(targetId) {
       const taskId = task._id
       taskUlContent += `
             <li class="task-list-li" id="li${taskId}">
-                <input class="task-checkbox" type="checkbox" id="${taskName}">
-                <label class="task-label" id="label${taskId}" for="${taskName}">${taskName}</label>
+                <input class="task-checkbox" type="checkbox" id="${taskId}">
+                <label class="task-label" id="label${taskId}" for="${taskId}">${taskName}</label>
                 <p>${taskDueDate}</p>
             </li>
             `;
