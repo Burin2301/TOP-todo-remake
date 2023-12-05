@@ -16,6 +16,6 @@ function renderScreen() {
 
 document.addEventListener("DOMContentLoaded", () => {
   renderScreen();
-  addProjectAndRenderProjects();
   chooseProjectAndRenderItsTasks();
+  addProjectAndRenderProjects();
 });

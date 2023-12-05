@@ -61,7 +61,8 @@ aside {
 aside ul {
   list-style: none;
 }
-.project-title {
+.project-title,
+.task-title {
   font-size: 1.6rem;
   font-weight: bold;
 }
@@ -75,6 +76,10 @@ aside ul {
   width: 130px;
   cursor: pointer;
 }
+.project-active{
+  background-color: var(--marroncito-nice);
+  color: var(--blue-aqua);
+}
 .input-task-div {
   min-width: 0;
   display: flex;
@@ -87,20 +92,6 @@ aside ul {
   width: 1.6rem;
   height: 1.6rem;
   cursor: pointer;
-}
-.project-label {
-  width: 100%;
-  display: inline-block;
-  padding: 2px;
-  margin-right: 1rem;
-}
-.project-checkbox {
-  display: none;
-}
-.project-checkbox:checked + label {
-  background-color: var(--beige);
-  color: var(--marroncito-nice);
-  border-radius: 5px;
 }
 
 /* TASK DIV */
@@ -134,6 +125,19 @@ aside ul {
 }
 .task-list {
   background: var(--amarillo-nota);
+}
+.task-list-li{
+  list-style: none;
+}
+.task-list-div{
+  display: flex;
+  justify-content: start;
+}
+.task-label{
+  margin-right: auto;
+}
+.task-checkbox{
+  margin-right: 1rem;
 }
 
 .inactive {

@@ -1,6 +1,7 @@
 import {
   createProject,
   projectList,
+  // projectSelected,
   saveProjectsInLocalAndRender,
 } from "./projects";
 import { renderTasks } from "../UI/body";
@@ -18,7 +19,7 @@ function createNewProject() {
   projectInput.value = "";
 }
 
-function createNewTask(projectID) {
+function createNewTask() {
   const taskInput = document.getElementById("inputNewtask");
   const taskInputDate = document.getElementById("inputNewtaskDate");
   const date = taskInputDate.value;
@@ -26,56 +27,66 @@ function createNewTask(projectID) {
   const newTaskName = taskInput.value;
   if (newTaskName === "") return;
   if (taskList.find((task) => task._name === newTaskName)) return;
-  const newTask = createTask(newTaskName, date, projectID);
+  const newTask = createTask(newTaskName, date, projectSelectedToRender);
   taskList.push(newTask);
   pushTaskIntoProjects(newTask);
   taskInputValue.value = "";
   taskInputDate.value = "";
   saveProjectsInLocalAndRender();
   saveTasksInLocalandRender();
-  isChecked(projectID)
-  addProjectAndRenderProjects()
 }
 
-function isChecked(targetId) {
-  const taskListContainer = document.querySelector(".task-container");
-  const checkbox = document.getElementById(targetId);
-  console.log(checkbox)
-  if (checkbox.checked) {
-    checkbox.classList.add("active-project");
-    const targetProject = projectList.find(
-      (project) => project._id === targetId,
-    );
-    taskListContainer.classList.remove("inactive");
-    renderTasks(targetProject);
-  }
-}
 
 function addProjectAndRenderProjects() {
   const addProjectBtn = document.getElementById("addProject");
   addProjectBtn.addEventListener("click", () => {
     createNewProject();
     saveProjectsInLocalAndRender(projectList);
-    chooseProjectAndRenderItsTasks();
   });
+}
+
+const LOCAL_STORAGE_SELECTED_PROJECT = "project.selected"
+let projectSelectedToRender = JSON.parse(localStorage.getItem(LOCAL_STORAGE_SELECTED_PROJECT))
+
+function saveProjectSelected(){
+  localStorage.setItem(LOCAL_STORAGE_SELECTED_PROJECT, JSON.stringify(projectSelectedToRender))
+}
+
+function markProjectAsChecked(projectSelectedToRender){
+  const projectCheckboxes = document.querySelectorAll('.project-list')
+  projectCheckboxes.forEach((project) => {
+    project.classList.remove('project-active')
+    if(project.id === projectSelectedToRender){
+      project.classList.add('project-active')
+      renderTasks(projectSelectedToRender);
+      addTask();
+      const taskContainerTitle = document.querySelector('.task-title')
+      const taskTitle = projectList.find((project)=>project._id===projectSelectedToRender  )
+      taskContainerTitle.innerText = taskTitle._name
+    }
+  });
+}
+
+function showTaskContainer(){
+  const taskContainer = document.querySelector('.task-container')
+  taskContainer.classList.remove('inactive')
 }
 
 function chooseProjectAndRenderItsTasks() {
-  const chosenProject = document.querySelectorAll(".project-checkbox");
-  chosenProject.forEach((project) => {
-    project.addEventListener("click", (e) => {
-      let targetProjectID = e.target.id;
-      isChecked(targetProjectID);
-      renderTasks(targetProjectID);
-      addTask(targetProjectID)
-    });
-  });
+  document.addEventListener('click', e => {
+    if(e.target.className === "project-list" ){
+      projectSelectedToRender = e.target.id
+      saveProjectSelected()
+      showTaskContainer()
+      markProjectAsChecked(projectSelectedToRender)
+    }
+  })
 }
 
-function addTask(projectID) {
+function addTask() {
   const addTaskBtn = document.querySelector("#addTask");
   addTaskBtn.addEventListener("click", () => {
-    createNewTask(projectID);
+    createNewTask();
   });
 }
 
@@ -98,5 +109,5 @@ export {
   addTask,
   addProjectAndRenderProjects,
   chooseProjectAndRenderItsTasks,
-  isChecked,
+  projectSelectedToRender,
 };

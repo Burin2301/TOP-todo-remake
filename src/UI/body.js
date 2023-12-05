@@ -1,3 +1,4 @@
+import { projectSelectedToRender } from "../modules/functions";
 import { projectList } from "../modules/projects";
 import plusIcon from "../styles/plus.png";
 
@@ -27,13 +28,9 @@ function renderAside(array) {
     projectUl.innerHTML = null;
     const projectName = project._name;
     const projectId = project._id
-    const dataProjectName = "data-" + project._name.replace(" ", "");
     projectUlContent += `
-        <li class="project-list">
-            <div class="project-list-div">
-                <input class="project-checkbox" data-project="${dataProjectName}" name="project" type="radio" id="${projectId}">
-                <label class="project-label" for="${projectId}">${projectName}</label>
-            </div>
+        <li class="project-list" id="${projectId}">
+          ${projectName}
         </li>
         `;
   });
@@ -71,8 +68,8 @@ taskContainer.classList.add("task-container");
 taskContainer.classList.add("inactive");
 
 const taskTitle = document.createElement("h2");
-taskTitle.classList.add("project-title");
-taskTitle.innerText = "Tasks";
+taskTitle.classList.add("task-title");
+taskTitle.innerText = 'Tasks' ;
 
 const taskUl = document.createElement("ul");
 taskUl.classList.add("task-ul");
