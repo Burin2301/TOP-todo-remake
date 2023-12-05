@@ -1,6 +1,6 @@
 class Task {
-  constructor(name, dueDate, project) {
-    (this._name = name), (this._dueDate = dueDate);
+  constructor(id, name, dueDate, project) {
+    (this._id = id), (this._name = name), (this._dueDate = dueDate);
     this._project = project;
     this._complete = false;
   }
@@ -37,7 +37,7 @@ function formatDate(date) {
   return formattedDate.toLocaleDateString(undefined, options);
 }
 
-function createTask(name, date, project) {
+function createTask(id, name, date, project) {
   if (date === "") {
     const newDate = Date.now();
     const result = formatDate(newDate);
@@ -47,7 +47,7 @@ function createTask(name, date, project) {
     const result = formatDate(date);
     date = result;
   }
-  const newTask = new Task(name, date, project);
+  const newTask = new Task(id, name, date, project);
   return newTask;
 }
 

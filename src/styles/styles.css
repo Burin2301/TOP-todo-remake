@@ -72,6 +72,7 @@ aside ul {
   padding: 0.2rem 1rem;
 }
 .project-list {
+  padding: 0.2rem 1rem;
   background-color: var(--amarillo-palido);
   width: 130px;
   cursor: pointer;
@@ -79,6 +80,7 @@ aside ul {
 .project-active{
   background-color: var(--marroncito-nice);
   color: var(--blue-aqua);
+  border-radius: .4rem ;
 }
 .input-task-div {
   min-width: 0;
@@ -116,6 +118,7 @@ aside ul {
 }
 .task-list-date {
   font-size: 0.6rem;
+  background-color: var(--amarillo-nota);
 }
 .trask-creation {
   display: flex;
@@ -128,13 +131,17 @@ aside ul {
 }
 .task-list-li{
   list-style: none;
-}
-.task-list-div{
   display: flex;
   justify-content: start;
 }
+.task-list-li p{
+  margin-left: 1rem;
+}
+
 .task-label{
+  padding: 0 .4rem;
   margin-right: auto;
+  overflow: hidden;
 }
 .task-checkbox{
   margin-right: 1rem;

@@ -1,7 +1,6 @@
 import {
   createProject,
   projectList,
-  // projectSelected,
   saveProjectsInLocalAndRender,
 } from "./projects";
 import { renderTasks } from "../UI/body";
@@ -25,9 +24,10 @@ function createNewTask() {
   const date = taskInputDate.value;
   const taskInputValue = taskInput;
   const newTaskName = taskInput.value;
+  const newTaskId = newTaskName.replace(/\s+/g, '')
   if (newTaskName === "") return;
   if (taskList.find((task) => task._name === newTaskName)) return;
-  const newTask = createTask(newTaskName, date, projectSelectedToRender);
+  const newTask = createTask(newTaskId, newTaskName, date, projectSelectedToRender);
   taskList.push(newTask);
   pushTaskIntoProjects(newTask);
   taskInputValue.value = "";
@@ -102,6 +102,20 @@ function pushTaskIntoProjects(newTask) {
   }
   console.table(projectList);
 }
+
+// COMPLETAR!!!
+// function changeTaskStatus(){
+//   const taskCheck = document.querySelectorAll('.task-list-li')
+
+//   taskCheck.forEach((checkbox)=>{
+//     checkbox.addEventListener('click',()=>{
+//       console.log("hola")
+//         // const taskCheckId = checkbox.id
+//         // const targetTask = taskList.find((task)=>task._id=== taskCheckId)
+//         // console.log(targetTask)
+//     })
+//   })
+// }
 
 export {
   createNewProject,

@@ -1,4 +1,3 @@
-import { projectSelectedToRender } from "../modules/functions";
 import { projectList } from "../modules/projects";
 import plusIcon from "../styles/plus.png";
 
@@ -85,13 +84,12 @@ function renderTasks(targetId) {
     targetProject._tasks.forEach((task) => {
       const taskName = task._name;
       const taskDueDate = task._dueDate;
+      const taskId = task._id
       taskUlContent += `
-            <li class="task-list-li">
-                <div class="task-list-div">
-                    <input class="task-checkbox" type="checkbox" id="${taskName}">
-                    <label class="task-label" for="${taskName}">${taskName}</label>
-                    <p>${taskDueDate}</p>
-                </div>
+            <li class="task-list-li" id="li${taskId}">
+                <input class="task-checkbox" type="checkbox" id="${taskName}">
+                <label class="task-label" id="label${taskId}" for="${taskName}">${taskName}</label>
+                <p>${taskDueDate}</p>
             </li>
             `;
     });
